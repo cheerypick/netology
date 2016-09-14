@@ -78,6 +78,7 @@
 
 <section class="slide" id="mvc-pic">
   <h2>MVC</h2>
+
   <p>Model-view-controller (MVC, «модель-представление-контроллер», «модель-вид-контроллер»)
     — схема использования нескольких шаблонов проектирования, с помощью которых модель приложения,
     пользовательский интерфейс и взаимодействие с пользователем разделены на три отдельных компонента таким образом,
@@ -87,7 +88,7 @@
 <section class="slide" id="mvc">
   <h2>MVC</h2>
   <ul>
-    <li>Model - данные и методы работы с ними, БД </li>
+    <li>Model - данные и методы работы с ними, БД</li>
     <li>View - отображение информации: UI, представление</li>
     <li>Controller - связь между пользователем и системой, между Model и View</li>
     <li>Angular - MV*: Model-View-Whatever</li>
@@ -118,27 +119,133 @@
 
 <section class="slide" id="editor">
   <h2>Установка</h2>
-     <img
-      src="i/download.PNG">
- </section>
-
-<section class="slide" id="first-run">
-  <h2>Как это работает</h2>
-  <p>Angular считывает HTML со встроенными в него специальнымт атрибутами тегов - директивами </p>
+  <img
+    src="i/download.PNG">
 </section>
 
-<section class="slide" id="git">
-  <h2>Рекомендую использовать <a href="https://git-scm.com/">git</a> для контроля версий кода</h2>
+<section class="slide" id="bootstrap">
+  <h2>Как это работает</h2>
+
+ <pre>
+      <code class="language-html line-numbers">
+        <xmp>
+          <head>
+            <script src="../libs/angular-1.5.3/angular.min.js">
+            </script>
+          </head>
+          <body ng-app>
+          <h1> {{'Hello, ' + 'world!'}}</h1>
+          </body>
+        </xmp>
+      </code>
+ </pre>
+</section>
+
+<section class="slide" id="how-it-works">
+  <h2>Как это работает</h2>
   <ul>
-    <li>Создать локально отдельный репозиторий для каждой домашней работы по проекту <code>git&nbsp;init</code>.</li>
-    <li>Фиксировать важные изменение по ходу работы добавив измененные файлы <code>git&nbsp;add</code> и зафиксировав
-      версию <code>git&nbsp;commit</code>.
+    <li>Атрибут<code>ng-app</code> - это директива Angular</li>
+    <li>Она отмечает HTML-элемент, который будет корневым элементом приложения.
     </li>
-    <li>Опубликать локальный репозиторий на <a href="https://github.com/">GitHub</a> или <a
-      href="https://bitbucket.org/">BitBucket</a> <code>git&nbsp;remote&nbsp;add</code></li>
-    <li>Опубликовать текущее состояние локального репозитория <code>git&nbsp;push</code>.</li>
   </ul>
 </section>
+
+
+<section class="slide" id="directive">
+  <h2>Директива</h2>
+  <code>ng-repeat</code>
+  <ul>
+    <li>Oписывают изменение поведения или преобразование DOM</li>
+    <li> множество встроенных и возможность написания собственных</li>
+    <li>http://angular.ru/guide/directive</li>
+  </ul>
+</section>
+
+
+<section class="slide" id="directives">
+  <h2>Встроенные директивы</h2>
+  <code> ng-app</code>
+
+  <p>
+    Корневой элемент angular приложения
+  </p>
+  <code>ng-bind</code>
+
+  <p>
+    Присваивает DOM-элементу значение выражения. Изменения переменной в scope приложения отражаются во view
+  </p>
+  <code>
+    <xmp><span ng-bind="name"></span></xmp>
+  </code>
+
+</section>
+
+<section class="slide" id="directives2">
+  <h2>Встроенные директивы</h2>
+  <code>ng-model</code>
+
+  <p>
+    Cхожа с ng-bind, устанавливает двустороннюю связь между view и model
+  </p>
+  <code>ng-class</code>
+
+  <p>
+    Динамическая загрузка и изменение атрибута class
+  </p>
+  <code>ng-controller</code>
+
+  <p>
+    Определяет JS controller class
+  </p>
+  <code>ng-repeat</code>
+
+  <p>Итерация по коллекции, вывод элементов списка (самая мощная директива angular?)
+  </p>
+
+</section>
+
+<section class="slide" id="directives3">
+  <h2>Встроенные директивы</h2>
+  <code>ng-show & ng-hide</code>
+
+  <p>Отображение или скрытие элемента средствами CSS согласно условному выражению</p>
+  <code>ng-if</code>
+
+  <p>
+    Схоже с ng-show/ng-hide, но элемент убирается из DOM, а при повторном появлении вставляется клон заново
+    скомпилированного элемента</p>
+  (Важно для быстродействия)
+
+  <p>Так как атрибуты с префиксом ng-* - невалидный HTML, есть альтернатива: data-ng-*
+  </p>
+
+</section>
+
+<section class="slide" id="expressions">
+  <h2>Выражения</h2>
+  <code>{{pokemon.name}}, {[1 + 2}}</code>
+  <ul>
+    <li>переменная, которая предварительно должна быть определена в контролере</li>
+    <li>выражение (+, -, …)</li>
+    <li><a
+      href="http://angular-doc.herokuapp.com/guide/expression">http://angular-doc.herokuapp.com/guide/expression</a>
+    </li>
+  </ul>
+</section>
+
+<section class="slide" id="expressions2">
+  <h2>Выражения Angular vs выражения JavaScript</h2>
+  <ul>
+    <li>значение всех свойств вычисляются в области видимости в отличие от JavaScript, где выражения
+      вычисляются в глобальном window</li>
+    <li>вычисление выражений лояльно к неопределенным и нулевым значениям, в отличие от JavaScript, где
+      такие вычисления выдадут исключение NullPointerException</li>
+    <li> последовательность действий не изменяется: в Angular нельзя использовать условные операторы, циклы и исключения</li>
+    <li> фильтры: можно передать результат вычисления выражений через цепочку фильтров. Например, чтобы преобразовать
+      объект даты в специфичный для данного региона понятный человеку формат.</li>
+  </ul>
+</section>
+
 
 <section class="slide" id="roadmap">
   <h2>План занятия</h2>
@@ -1099,7 +1206,9 @@
 <section class="slide" id="resources">
   <h2>Материалы</h2>
   <ul>
-    <li>AngularJS официальный tutorial <a href="https://docs.angularjs.org/tutorial">https://docs.angularjs.org/tutorial</a>.</li>
+    <li>AngularJS официальный tutorial <a
+      href="https://docs.angularjs.org/tutorial">https://docs.angularjs.org/tutorial</a>.
+    </li>
     <li>Раздел <a href="https://learn.javascript.ru/es-modern">Современные возможности ES-2015</a> в учебнике на
       javascript.ru
     </li>
